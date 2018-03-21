@@ -5,11 +5,6 @@ var config = require('./config');
 var app = express();
 var googleProfile = {};
 
-app.set('view engine', 'pug');
-app.set('views', './views');
-app.use(passport.initialize());
-app.use(passport.session());
-
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -32,6 +27,11 @@ passport.use(new GoogleStrategy({
         cb(null, profile);
     }
 ));
+
+app.set('view engine', 'pug');
+app.set('views', './views');
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 //app routes
